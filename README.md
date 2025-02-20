@@ -6,4 +6,4 @@ Project Name: PROJECT_NAME
 
 Team Members: STUDENTS_NETIDS
 
-Project Manager: PM_NETID
+Project Manager: advaity2, kakatur2
