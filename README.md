@@ -1,9 +1,9 @@
 # Group 13
 
-Project Name: PROJECT_NAME
+Project Name: Schedullini
 
-[MVP Link](https://docs.google.com/document/d/1xFI9DDdO5HZAcu36Y6NL-RTDry5E3WHkfy-ZEWuqbXM/edit?usp=sharing)
+[MVP Link](https://docs.google.com/document/d/1J2xOf92YZxxywa7ZuxA7nr8104xNSOdZ/edit?usp=sharing&ouid=118220098316619848500&rtpof=true&sd=true)
 
-Team Members: STUDENTS_NETIDS
+Team Members: benleyv2, johnnyh3
 
 Project Manager: advaity2, kakatur2
