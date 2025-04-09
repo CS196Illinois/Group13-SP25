@@ -1,22 +1,34 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
+  const [isSignIn, setIsSignIn] = useState(true);
+
+  const handleAuthSuccess = () => {
+    console.log("Authentication successful - redirect to main app");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and johnny to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header">        
+        {isSignIn ? (
+          <>
+            <SignIn 
+              onSwitchToSignUp={() => setIsSignIn(false)} 
+              onAuthSuccess={handleAuthSuccess}
+            />
+          </>
+        ) : (
+          <>
+            <SignUp 
+              onSwitchToSignIn={() => setIsSignIn(true)} 
+              onAuthSuccess={handleAuthSuccess}
+            />
+          </>
+        )}
       </header>
     </div>
   );
