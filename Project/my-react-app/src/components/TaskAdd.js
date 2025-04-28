@@ -8,6 +8,8 @@ export default function TaskManager() {
     "CS128 Homework"
   ]);
   const [newTask, setNewTask] = useState('');
+  const [urgency, setUrgency] = useState('');
+  const [difficulty, setDifficulty] = useState('');
 
   const removeTask = (index) => {
     setTasks(tasks.filter((_, i) => i !== index));
@@ -17,8 +19,12 @@ export default function TaskManager() {
     if (newTask.trim() !== '') {
       setTasks([...tasks, newTask]);
       setNewTask('');
+      setUrgency('');
+      setDifficulty('');
     }
   };
+
+  const isSelected = (value, current) => value === current ? 'ring-2 ring-white' : '';
 
   return (
     <div className="w-96 p-4 bg-gradient-to-br from-gray-700 via-purple-600 to-blue-500 rounded-xl text-white space-y-4 shadow-lg">
@@ -50,18 +56,18 @@ export default function TaskManager() {
       <div>
         <p className="mb-1">Urgency</p>
         <div className="flex gap-2">
-          <Button className="bg-pink-600">Hot</Button>
-          <Button className="bg-blue-400">Chill</Button>
-          <Button className="bg-green-400">Anytime</Button>
+          <Button className={`bg-pink-600" ${isSelected('Hot', urgency)}`} onClick={() => setUrgency('Hot')}>Hot</Button>
+          <Button className={`bg-blue-500" ${isSelected('Chill', urgency)}`} onClick={() => setUrgency('Chill')}>Chill</Button>
+          <Button className={`bg-green-400 ${isSelected('Anytime', urgency)}`} onClick={() => setUrgency('Anytime')}>Anytime</Button>
         </div>
       </div>
 
       <div>
         <p className="mt-3 mb-1">Difficulty</p>
         <div className="flex gap-2">
-          <Button className="bg-pink-700">Hard</Button>
-          <Button className="bg-blue-500">Mid</Button>
-          <Button className="bg-green-500">Easy</Button>
+        <Button className={`bg-pink-600 ${isSelected('Hard', difficulty)}`} onClick={() => setDifficulty('Hard')}>Hard</Button>
+        <Button className={`bg-blue-500 ${isSelected('Mid', difficulty)}`} onClick={() => setDifficulty('Mid')}>Mid</Button>
+        <Button className={`bg-green-400 ${isSelected('Easy', difficulty)}`} onClick={() => setDifficulty('Easy')}>Easy</Button>
         </div>
       </div>
 
