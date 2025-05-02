@@ -2,8 +2,9 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
-function MyCalendar({ events, handleDateClick }) {
+function MyCalendar({ events, handleDateClick, handleDatesSet }) {
   return (
     <FullCalendar
       headerToolbar={{
@@ -11,13 +12,14 @@ function MyCalendar({ events, handleDateClick }) {
         center: "",
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       }}
-      plugins={[dayGridPlugin, timeGridPlugin]}
+      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]} 
       initialView="timeGridWeek"
       editable={true}
       selectable={true}
       events={events}
       expandRows={true}
       dateClick={handleDateClick}
+      datesSet={handleDatesSet}
     />
   );
 }
