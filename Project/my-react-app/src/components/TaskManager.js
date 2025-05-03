@@ -4,23 +4,55 @@ export default function TaskManager({ onClose, onAdd }) {
   const [task, setTask] = useState("");
   const [urgency, setUrgency] = useState("Anytime");
   const [difficulty, setDifficulty] = useState("Easy");
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]); // yyyy-mm-dd
-  const [time, setTime] = useState("09:00"); // default to 9:00 AM
 
   const handleAdd = () => {
     if (!task.trim()) return;
-
-    const startDateTime = new Date(`${date}T${time}:00`);
+  
+    const now = new Date();
+    let offsetDays;
+  
+    switch (urgency) {
+      case "Hot":
+        offsetDays = Math.random() < 0.5 ? 0 : 1; // today or tomorrow
+        break;
+      case "Chill":
+        offsetDays = Math.floor(Math.random() * 3) + 2; // 2–4 days
+        break;
+      case "Anytime":
+        offsetDays = Math.floor(Math.random() * 3) + 4; // 4–6 days
+        break;
+      default:
+        offsetDays = 0;
+    }
+  
+    // Set base date
+    const startDateTime = new Date();
+    startDateTime.setDate(now.getDate() + offsetDays);
+  
+    // Random hour between 16 (4PM) and 19 (7PM) exclusive
+    const randomHour = Math.floor(Math.random() * 3) + 16; // 16–18
+    startDateTime.setHours(randomHour, 0, 0, 0);
+  
+    // Duration based on difficulty
+    let durationHours = 1;
+    if (difficulty === "Mid") durationHours = 2;
+    else if (difficulty === "Hard") durationHours = 3;
+  
+    const endDateTime = new Date(startDateTime.getTime() + durationHours * 60 * 60 * 1000);
+  
     const newEvent = {
       title: `${task} (${urgency}, ${difficulty})`,
       start: startDateTime.toISOString(),
+      end: endDateTime.toISOString(),
       allDay: false,
     };
-
+  
     onAdd(newEvent);
     setTask("");
     onClose();
   };
+  
+  
 
   return (
     <>
@@ -36,23 +68,6 @@ export default function TaskManager({ onClose, onAdd }) {
           placeholder="Task name"
           style={inputStyle}
         />
-
-        <label>Select date</label>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          style={inputStyle}
-        />
-
-        <label>Select time</label>
-        <input
-          type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          style={inputStyle}
-        />
-
         <label>Urgency</label>
         <div style={buttonGroupStyle}>
           {["Hot", "Chill", "Anytime"].map((level) => (

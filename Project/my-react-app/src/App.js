@@ -124,9 +124,10 @@ function App() {
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         },
         end: {
-          dateTime: new Date(new Date(newEvent.start).getTime() + 60 * 60 * 1000).toISOString(), // default: 1 hour
+          dateTime: newEvent.end,
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         },
+        
       },
     })
       .then(() => {
